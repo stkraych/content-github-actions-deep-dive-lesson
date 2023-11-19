@@ -66,7 +66,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Upload to S3
-        run: aws s3 cp ${{ github.sha }}.zip s3://my-bucket-www/${{ github.sha }}.zip
+        run: aws s3 cp ${{ github.sha }}.zip s3://my-bucket-www1/${{ github.sha }}.zip
     
   test:
     runs-on: ubuntu-latest
@@ -85,8 +85,8 @@ jobs:
         run: |
           aws lambda create-function \
             --function-name test-function-${{ matrix.input }}\
-            --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/my-githubactions-lambda-role \
-            --code S3Bucket=my-bucket-www,S3Key=${{ github.sha }}.zip \
+            --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/lambda-role \
+            --code S3Bucket=my-bucket-www1,S3Key=${{ github.sha }}.zip \
             --handler lambda_function.lambda_handler \
             --runtime python3.8 \
             --region us-east-1
