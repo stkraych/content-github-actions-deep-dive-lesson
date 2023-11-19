@@ -86,9 +86,9 @@ jobs:
             --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/my-githubactions-lambda-role 
       - name: Wait 30 seconds
         run: sleep 30
-      - name: Destroy test function
-        if: ${{ always() }}
-        run: aws lambda delete-function --function-name test-function
+      # - name: Destroy test function
+      #   if: ${{ always() }}
+      #   run: aws lambda delete-function --function-name test-function
 
 
   deploy-lambda:
