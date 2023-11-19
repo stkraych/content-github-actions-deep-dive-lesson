@@ -82,8 +82,8 @@ jobs:
         run: |
           aws lambda create-function \
             --function-name test-function \
-            --role arn:aws:iam::***:role/my-githubactions-lambda-role \
-            --code S3Bucket=my-bucket-www,S3Key=4e7ab88bb5cc78bd32d718df5549167f57d30f11.zip \
+            --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/my-githubactions-lambda-role \
+            --code S3Bucket=my-bucket-www,S3Key=${{ github.sha }}.zip \
             --handler lambda_function.lambda_handler \
             --runtime python3.8 \
             --region us-east-1
